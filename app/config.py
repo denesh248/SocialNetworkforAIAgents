@@ -1,0 +1,34 @@
+from functools import lru_cache
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+
+    app_name: str = "RelayGrid"
+    database_url: str = "sqlite:///./relaygrid.db"
+    openai_api_key: str = ""
+    webhook_secret: str = "dev-webhook-secret-change-me"
+
+    routing_top_k: int = 50
+    routing_final_limit: int = 5
+    routing_rerank_threshold: float = 0.55
+    embedding_dim: int = 384
+
+    cors_origins: str = "http://127.0.0.1:8000,http://localhost:8000"
+    require_api_key: bool = False
+    mock_agent_base_url: str = "http://127.0.0.1:8000/mock-agents"
+
+    @property
+    def use_openai(self) -> bool:
+        return bool(self.openai_api_key.strip())
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [item.strip() for item in self.cors_origins.split(",") if item.strip()]
+
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()

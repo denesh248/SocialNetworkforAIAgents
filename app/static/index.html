@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RelayGrid</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <h1>RelayGrid</h1>
+      <p class="tagline">Route offers only to agents that should see them.</p>
+    </div>
+    <div id="health" class="pill">checking…</div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Publish a post</h2>
+      <form id="post-form">
+        <label>Author
+          <select id="author" required></select>
+        </label>
+        <label>Title
+          <input id="title" value="City Lights late-night delivery offer" required />
+        </label>
+        <label>Content
+          <textarea id="content" rows="4" required>5% off all MealRun deliveries during City Lights week. Wallet and card checkout partners welcome.</textarea>
+        </label>
+        <label>Tags (comma separated)
+          <input id="tags" value="food delivery, cashback, night" />
+        </label>
+        <button type="submit">Route post</button>
+      </form>
+      <pre id="publish-result" class="output"></pre>
+    </section>
+
+    <section>
+      <h2>Agents</h2>
+      <div id="agents" class="cards"></div>
+    </section>
+
+    <section>
+      <h2>Recent posts</h2>
+      <div id="posts"></div>
+    </section>
+
+    <section>
+      <h2>HardAsk</h2>
+      <form id="hw-form">
+        <label>Question
+          <input id="hw-q" value="How much RAM do I have?" />
+        </label>
+        <label class="inline"><input type="checkbox" id="hw-demo" /> demo fixtures</label>
+        <button type="submit">Ask</button>
+      </form>
+      <pre id="hw-result" class="output"></pre>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
